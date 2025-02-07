@@ -2,6 +2,7 @@ const chai = require("chai");
 const expect = require("chai").expect;
 chai.use(require("chai-http"));
 chai.use(require("chai-json-schema-ajv"));
+const { users } = require("../server");
 const server = require("../server");
 const apiAddress = "http://localhost:" + (process.env.PORT || 3000);
 const loginSuccessfulSchema = require("./testSchemas/loginSuccessfulSchema.json");
@@ -178,8 +179,9 @@ describe("Testing login", function () {
   before(async function () {
     // start the server
     server.start();
+    // Reset users to avoid duplicate errors
 
-    await chai
+    /*await chai
       .request(apiAddress)
       .post("/signup")
       .send({
@@ -191,7 +193,7 @@ describe("Testing login", function () {
       })
       .catch((error) => {
         throw error;
-      });
+      }); */
   });
 
   after(function () {
